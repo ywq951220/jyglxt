@@ -156,7 +156,7 @@ layui.extend({
                             layer.close(index);
                             layer.prompt({
                                 formType: 2,
-                                title: '请输入删除原因！！！！！sss'
+                                title: '请输入删除原因！'
                             }, function (text, index) {
                                 layer.close(index);
                                 delJltdjl(data.id, text);
