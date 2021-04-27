@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.TbJltdjlMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.TbJltdjl">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="DW_ID" jdbcType="VARCHAR" property="dwId"/>
+        <result column="ZW_ID" jdbcType="VARCHAR" property="zwId"/>
+        <result column="SPZT" jdbcType="VARCHAR" property="spzt"/>
+        <result column="SPSJ" jdbcType="TIMESTAMP" property="spsj"/>
+        <result column="SPYJ" jdbcType="VARCHAR" property="spyj"/>
+        <result column="MSSJ" jdbcType="DATE" property="mssj"/>
+        <result column="MSDZ" jdbcType="VARCHAR" property="msdz"/>
+        <result column="LYZT" jdbcType="VARCHAR" property="lyzt"/>
+        <result column="LYSJ" jdbcType="TIMESTAMP" property="lysj"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+        <result column="ZXYY" jdbcType="VARCHAR" property="zxyy"/>
+    </resultMap>
+
+    <resultMap id="ResultJltdjlVOMap" type="com.csxy.project.model.vo.TbJlsqjlVO">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="DW_ID" jdbcType="VARCHAR" property="dwId"/>
+        <result column="ZW_ID" jdbcType="VARCHAR" property="zwId"/>
+        <result column="SPZT" jdbcType="VARCHAR" property="spzt"/>
+        <result column="SPSJ" jdbcType="TIMESTAMP" property="spsj"/>
+        <result column="SPYJ" jdbcType="VARCHAR" property="spyj"/>
+        <result column="MSSJ" jdbcType="DATE" property="mssj"/>
+        <result column="MSDZ" jdbcType="VARCHAR" property="msdz"/>
+        <result column="LYZT" jdbcType="VARCHAR" property="lyzt"/>
+        <result column="LYSJ" jdbcType="TIMESTAMP" property="lysj"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+        <result column="ZXYY" jdbcType="VARCHAR" property="zxyy"/>
+
+        <result column="SQRXM" jdbcType="VARCHAR" property="sqrxm"/>
+        <result column="SQR_ROLE" jdbcType="VARCHAR" property="sqr_role"/>
+        <result column="SQDW" jdbcType="VARCHAR" property="sqdw"/>
+        <result column="SQZW" jdbcType="VARCHAR" property="sqzw"/>
+    </resultMap>
+
+    <select id="queryTdjlBythridId" resultMap="BaseResultMap">
+        select * from tb_jltdjl a where a.yxzt='1'
+        <if test="userId != null and userId != ''">
+            and a.user_id=#{userId}
+        </if>
+        <if test="dwId != null and dwId != ''">
+            and a.dw_id=#{dwId}
+        </if>
+        <if test="zwId != null and zwId != ''">
+            and a.zw_id=#{zwId}
+        </if>
+        <if test="spzt != null and spzt != ''">
+            and a.spzt=#{spzt}
+        </if>
+    </select>
+
+    <select id="queryQzzTdjlByUserId" resultMap="ResultJltdjlVOMap">
+        select a.id,a.user_id,d.name sqrxm,d.role sqr_role,b.gsmc sqdw,c.zwmc sqzw,a.spzt,a.spsj,a.spyj,
+        a.mssj,a.msdz,a.lyzt
+        from tb_jltdjl a
+        left join
+        tb_zpdw b on a.dw_id=b.id and b.yxzt='1'
+        left join
+        tb_zpdw_zw c on a.zw_id=c.id and c.yxzt='1'
+        left join
+        sys_user d on a.user_id=d.id and d.yxzt='1'
+        where a.yxzt='1' and a.user_id=#{userId}
+        <if test="spzt != null and spzt != ''">
+            and a.spzt=#{spzt}
+        </if>
+        <if test="lyzt != null and lyzt != ''">
+            and a.lyzt=#{lyzt}
+        </if>
+    </select>
+
+    <select id="queryQymsjlByUserId" resultMap="ResultJltdjlVOMap">
+        select d.id,d.user_id,e.name sqrxm,e.role sqr_role,b.gsmc sqdw,a.zwmc sqzw,d.spzt,d.spsj,d.spyj,
+        d.mssj,d.msdz,d.lyzt
+        from tb_zpdw_zw a
+        left join
+        tb_zpdw b on a.dw_id=b.id and b.yxzt='1'
+        left join
+        tb_jltdjl d on a.id=d.zw_id and d.yxzt='1'
+        left join
+        sys_user e on d.user_id=e.id and e.yxzt='1'
+        where a.yxzt='1' and a.id in (
+            select c.zw_id from tb_jltdjl c where c.yxzt='1'
+        ) and exists (
+        	select 1 from tb_zpdw f where a.dw_id=f.id and f.yxzt='1' and f.user_id=#{userId}
+        )
+    </select>
+</mapper>

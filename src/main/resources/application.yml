@@ -1,0 +1,36 @@
+app:
+  code: jyglxt
+server:
+  port: 1111 # 访问的端口
+  servlet:
+    context-path: /jyglxt # 访问的路径
+  tomcat:
+    max-http-form-post-size: -1
+spring:
+  # SpringBoot多环境分区
+  profiles:
+    active: dev
+  thymeleaf: # 前台模版引擎
+    prefix: classpath:/templates/
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    cache: false
+  mvc:
+    favicon:
+      enabled: false
+    static-path-pattern: /static/**
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+mybatis:
+  type-aliases-package: com.csxy.project.model
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: false
+    use-generated-keys: false
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    jdbc-type-for-null: "null"

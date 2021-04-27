@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.TbZwtjjlMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.TbZwtjjl">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="DW_ID" jdbcType="VARCHAR" property="dwId"/>
+        <result column="ZW_ID" jdbcType="VARCHAR" property="zwId"/>
+        <result column="TJ_USER_ID" jdbcType="VARCHAR" property="tjUserId"/>
+        <result column="TX_USER_ID" jdbcType="VARCHAR" property="txUserId"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+        <result column="SFTD" jdbcType="VARCHAR" property="sftd"/>
+    </resultMap>
+
+    <resultMap id="ZwtjjlVOResultMap" type="com.csxy.project.model.vo.TbZwtjjlVO">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="DW_ID" jdbcType="VARCHAR" property="dwId"/>
+        <result column="ZW_ID" jdbcType="VARCHAR" property="zwId"/>
+        <result column="TJ_USER_ID" jdbcType="VARCHAR" property="tjUserId"/>
+        <result column="TX_USER_ID" jdbcType="VARCHAR" property="txUserId"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+        <result column="SFTD" jdbcType="VARCHAR" property="sftd"/>
+
+        <result column="txr_xm" jdbcType="VARCHAR" property="txr_xm"/>
+        <result column="tjr_xm" jdbcType="VARCHAR" property="tjr_xm"/>
+        <result column="tjgs" jdbcType="VARCHAR" property="tjgs"/>
+        <result column="tjzw" jdbcType="VARCHAR" property="tjzw"/>
+    </resultMap>
+
+    <select id="queryZwtjjlListByUserId" resultMap="ZwtjjlVOResultMap">
+        select a.*,b.zwmc tjzw,c.gsmc tjgs,d.name txr_xm,e.name tjr_xm from tb_zwtjjl a
+        left join
+        tb_zpdw_zw b on a.zw_id=b.id and b.yxzt='1'
+        left join
+        tb_zpdw c on b.dw_id=c.id and c.yxzt='1'
+        left join
+        sys_user d on a.tx_user_id=d.id and d.yxzt='1'
+        left join
+        sys_user e on a.tj_user_id=e.id and d.yxzt='1'
+        where a.yxzt='1'
+        <choose>
+            <when test="role == 1">
+                and a.tx_user_id=#{txUserId}
+            </when>
+            <when test="role == 3">
+                and a.tj_user_id=#{txUserId}
+            </when>
+        </choose>
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.TbZpdwZwMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.TbZpdwZw">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="DW_ID" jdbcType="VARCHAR" property="dwId"/>
+        <result column="ZWMC" jdbcType="VARCHAR" property="zwmc"/>
+        <result column="ZWZZ" jdbcType="VARCHAR" property="zwzz"/>
+        <result column="ZWXLYQ" jdbcType="VARCHAR" property="zwxlyq"/>
+        <result column="GZJYYQ" jdbcType="VARCHAR" property="gzjyyq"/>
+        <result column="SBDZ" jdbcType="VARCHAR" property="sbdz"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+    </resultMap>
+
+    <select id="queryZwxxByDwId" resultMap="BaseResultMap">
+        select * from tb_zpdw_zw a where a.yxzt='1' and a.dw_id = #{dwId}
+    </select>
+</mapper>

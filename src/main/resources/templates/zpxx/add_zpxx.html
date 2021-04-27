@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增招聘公司信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/style/admin.css" media="all">
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <form id="add_user_zpxx_form" class="layui-form layui-form-pane" lay-filter="add_user_zpxx_form" style="padding: 10px;">
+            <input type="text" id="user_zpxx_id" name="id" style="display: none;"/>
+            <input type="text" id="user_id" name="userId" style="display: none;"/>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">公司名称<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <input type="text" id="user_zpxx_gsmc" name="gsmc" class="layui-input add_zpxx" placeholder="请输入公司名称..." autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">成立时间<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <input type="text" id="user_zpxx_clsj" name="clsj" class="layui-input add_zpxx" placeholder="请选择成立时间..." autocomplete="off" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">法人代表<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <input type="text" id="user_zpxx_frdb" name="frdb" class="layui-input add_zpxx" placeholder="请输入法人代表..." autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">座机电话<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <input type="text" id="user_zpxx_zjdh" name="zjdh" class="layui-input add_zpxx" placeholder="请输入座机电话..." autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">公司地址<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <input type="text" id="user_zpxx_gsdz" name="gsdz" class="layui-input add_zpxx" placeholder="请输入公司地址..." autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px; height: 100px;">公司福利</label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <textarea type="text" id="user_zpxx_gsfl" name="gsfl" class="layui-textarea add_zpxx" placeholder="请输入公司福利..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px; height: 100px;">公司简介</label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <textarea type="text" id="user_zpxx_gsjj" name="gsjj" class="layui-textarea add_zpxx" placeholder="请输入公司简介..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div style="height: 50px;"></div>
+        <div class="layui-row my-footer" id="save_zpxx_btn_div">
+            <button class="layui-btn layui-btn-sm" onclick="layui.add_zpxx.saveZpxx();">提交</button>
+            <button class="layui-btn layui-btn-sm layui-btn-warm" onclick="layui.add_zpxx.resetZpxxForm();">重置</button>
+        </div>
+    </div>
+</div>
+
+<script src="../../static/js/jquery-3.4.1.js"></script>
+<script src="../../static/layui/layui.js"></script>
+
+<script>
+    layui.config({
+        base: '../static/controller/' //静态资源所在路径
+    }).extend({
+        add_zpxx: '{/}../../static/controller/zpxx/add_zpxx'
+    }).use(['add_zpxx'], function () {
+        layui.add_zpxx.load();
+    })
+</script>
+</body>
+</html>

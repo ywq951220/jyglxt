@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.SysParamterMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.SysParamter">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="TYPECODE" jdbcType="VARCHAR" property="typecode"/>
+        <result column="VALUE" jdbcType="VARCHAR" property="value"/>
+        <result column="SEQ" jdbcType="INTEGER" property="seq"/>
+        <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+    </resultMap>
+
+    <select id="getParamterByTypeCode" resultMap="BaseResultMap">
+        select * from sys_paramter a where a.YXZT='1' and a.TYPECODE=#{typeCode}
+    </select>
+</mapper>

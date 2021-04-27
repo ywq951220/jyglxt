@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简历投递记录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/style/admin.css" media="all">
+</head>
+<body>
+<div class="layui-fluid" style="margin-top: 25px">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <table id="jyglxt_jltdqk_table" class="layui-table" lay-filter="jyglxt_jltdqk_table"></table>
+            <!-- 头工具栏 -->
+            <script type="text/html" id="toolbar_jyglxt_jltdqk_table">
+                <a class="layui-btn layui-btn-sm" lay-event="ref">
+                    <i class="layui-icon layui-icon-refresh"></i>刷新
+                </a>
+                <div class="layui-btn-container"></div>
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="sh_qzz_tdxx" class="layui-fluid" style="display: none;">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form id="sh_qzz_tdxx_form" class="layui-form layui-form-pane" lay-filter="sh_qzz_tdxx_form" style="padding: 10px;">
+                <input type="hidden" id="jltdjl_id" name="id"/>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">审核结果<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="border: 1px solid #e6e6e6; margin-left: 100px;">
+                            <input type="radio" name="spzt" lay-filter="spzt" value="1" title="邀请面试"/>
+                            <input type="radio" name="spzt" lay-filter="spzt" value="-1" title="拒绝面试"/>
+                        </div>
+                    </div>
+                </div>
+                <div id="sh_mssj_div" class="layui-row" style="display: none;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">面试时间<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="sh_mssj" class="layui-input" name="mssj" lay-verify="required"
+                                   placeholder="请选择面试时间..." autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div id="sh_msdz_div" class="layui-row" style="display: none;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">面试地址<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="sh_msdz" class="layui-input" name="msdz" lay-verify="required"
+                                   placeholder="请输入面试地址..." autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px; height: 100px;">审核意见<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="margin-left: 100px;">
+                            <textarea type="text" name="spyj" class="layui-textarea" placeholder="请输入反馈意见..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="layui-row" style="text-align: center;margin-top: 40px">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="layui.jltdqk_index.qrShBtn();">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="is_lyzt_qzz_tdxx" class="layui-fluid" style="display: none;">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form id="is_lyzt_qzz_tdxx_form" class="layui-form layui-form-pane" lay-filter="is_lyzt_qzz_tdxx_form" style="padding: 10px;">
+                <input type="hidden" id="is_lyzt_jltdjl_id" name="id"/>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required" style="width: 100px">录用结果<span class="lh-bt-span">*</span></label>
+                        <div class="layui-input-block" style="border: 1px solid #e6e6e6; margin-left: 100px;">
+                            <input type="radio" name="lyzt" lay-filter="lyzt" value="1" title="录用"/>
+                            <input type="radio" name="lyzt" lay-filter="lyzt" value="-1" title="拒绝录用"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="layui-row" style="text-align: center;margin-top: 40px">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="layui.jltdqk_index.qrLyBtn();">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../static/js/jquery-3.4.1.js"></script>
+<script src="../../static/layui/layui.js"></script>
+
+<script>
+    layui.config({
+        base: '../static/controller/' //静态资源所在路径
+    }).extend({
+        jltdqk_index: '{/}../../static/controller/jltdqk/jltdqk_index',
+        grxx_index: '{/}../../static/controller/grxx/grxx_index'
+    }).use(['jltdqk_index', 'grxx_index'], function () {
+        layui.jltdqk_index.load();
+    })
+</script>
+</body>
+</html>

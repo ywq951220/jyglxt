@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.SysUser">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="SEX" jdbcType="VARCHAR" property="sex"/>
+        <result column="SFZ" jdbcType="VARCHAR" property="sfz"/>
+        <result column="LXDH" jdbcType="VARCHAR" property="lxdh"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="ROLE" jdbcType="VARCHAR" property="role"/>
+        <result column="ZCSJ" jdbcType="TIMESTAMP" property="zcsj"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+    </resultMap>
+
+    <resultMap id="BaseUserVOResultMap" type="com.csxy.project.model.vo.SysUserVO">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="SEX" jdbcType="VARCHAR" property="sex"/>
+        <result column="SFZ" jdbcType="VARCHAR" property="sfz"/>
+        <result column="LXDH" jdbcType="VARCHAR" property="lxdh"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="ROLE" jdbcType="VARCHAR" property="role"/>
+        <result column="ZCSJ" jdbcType="TIMESTAMP" property="zcsj"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+
+        <result column="TOKEN" jdbcType="VARCHAR" property="token"/>
+        <result column="XBMC" jdbcType="VARCHAR" property="xbmc"/>
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="grjlId" jdbcType="VARCHAR" property="grjlId"/>
+
+        <result column="jltdjlId" jdbcType="VARCHAR" property="jltdjlId"/>
+        <result column="spzt" jdbcType="VARCHAR" property="spzt"/>
+        <result column="lyzt" jdbcType="VARCHAR" property="lyzt"/>
+
+        <result column="GSMC" jdbcType="VARCHAR" property="gsmc"/>
+        <result column="ZWMC" jdbcType="VARCHAR" property="zwmc"/>
+    </resultMap>
+
+    <select id="getSysUserByUP" resultMap="BaseUserVOResultMap">
+        select * from sys_user a where a.yxzt != '0' and a.user_name=#{userName} and a.password=#{password}
+    </select>
+
+    <select id="queryUserList" resultMap="BaseUserVOResultMap">
+        select a.*,b.id grjlId from sys_user a
+        left join
+        tb_grjl b on a.id=b.user_id and b.yxzt='1'
+        where 1=1
+        <choose>
+            <when test="yxzt != null and yxzt != ''">
+                and a.yxzt=#{yxzt}
+            </when>
+            <otherwise>
+                and a.yxzt != '0'
+            </otherwise>
+        </choose>
+        <if test="role != null and  role != ''">
+            and a.role=#{role}
+        </if>
+    </select>
+
+    <select id="getSysUserCountByUserName" resultType="java.lang.Integer">
+        select count(0) from sys_user a where a.yxzt='1' and a.user_name=#{userName}
+    </select>
+
+    <select id="queryXsjyqkList" resultMap="BaseUserVOResultMap">
+        select a.*,(
+            select c.id from tb_jltdjl c where a.id=c.user_id and c.yxzt='1' limit 1
+        ) jltdjlId,(
+            select c.spzt from tb_jltdjl c where a.id=c.user_id and c.yxzt='1' limit 1
+        ) spzt,(
+            select b.lyzt from tb_jltdjl b where a.id=b.user_id and b.yxzt='1' and b.lyzt='1'
+        ) lyzt from sys_user a where a.yxzt='1' and a.role='1'
+    </select>
+
+    <select id="queryQzzUserList" resultMap="BaseUserVOResultMap">
+        select * from sys_user a where a.yxzt='1' and a.role=#{role} and not exists(
+		    select 1 from tb_zwtjjl c where a.id=c.tx_user_id and c.yxzt='1' and c.zw_id=#{zwId}
+        ) and not exists (
+            select 1 from tb_jltdjl b where a.id=b.user_id and b.yxzt='1' and b.spzt='1' and b.lyzt='1'
+        )
+    </select>
+
+    <select id="queryUserCount" resultType="java.lang.Integer">
+        select count(0) from sys_user a where a.yxzt='1' and a.role=#{role}
+    </select>
+
+    <select id="getYjyQzzList" resultMap="BaseUserVOResultMap">
+        select b.name,c.gsmc,d.zwmc from tb_jltdjl a
+        left join sys_user b on a.user_id=b.id and b.yxzt='1'
+        left join tb_zpdw c on a.dw_id=c.id and c.yxzt='1'
+        left join tb_zpdw_zw d on a.zw_id=d.id and d.yxzt='1'
+        where a.yxzt='1' and a.spzt='1' and a.lyzt='1' and exists (
+            select 1 from sys_user e where a.user_id=e.id and e.yxzt='1'
+        )
+    </select>
+</mapper>

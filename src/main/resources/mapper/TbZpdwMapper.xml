@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.TbZpdwMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.TbZpdw">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="GSMC" jdbcType="VARCHAR" property="gsmc"/>
+        <result column="CLSJ" jdbcType="DATE" property="clsj"/>
+        <result column="FRDB" jdbcType="VARCHAR" property="frdb"/>
+        <result column="ZJDH" jdbcType="VARCHAR" property="zjdh"/>
+        <result column="GSDZ" jdbcType="VARCHAR" property="gsdz"/>
+        <result column="GSFL" jdbcType="VARCHAR" property="gsfl"/>
+        <result column="GSJJ" jdbcType="LONGVARCHAR" property="gsjj"/>
+        <result column="SHZT" jdbcType="LONGVARCHAR" property="shzt"/>
+        <result column="SHYJ" jdbcType="LONGVARCHAR" property="shyj"/>
+        <result column="YXZT" jdbcType="VARCHAR" property="yxzt"/>
+    </resultMap>
+
+    <select id="getZpdwList" resultMap="BaseResultMap">
+        select * from tb_zpdw a where a.yxzt='1'
+        <choose>
+            <when test="role == 2">
+                and a.user_id=#{userId}
+            </when>
+            <when test="role == 4">
+                and a.shzt='0'
+            </when>
+            <otherwise>
+                and a.shzt='1'
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="queryZpdwByUserId" resultMap="BaseResultMap">
+        select * from tb_zpdw a where a.yxzt='1' and a.user_id=#{userId}
+    </select>
+</mapper>

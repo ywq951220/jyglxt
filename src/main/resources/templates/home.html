@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/style/admin.css" media="all">
+    <link type="text/css" rel="stylesheet" href="../static/style/style.css"/>
+</head>
+<body>
+<div class="layui-fluid" style="margin-top: 25px;">
+    <div class="layui-row layui-col-space15 ">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <img src="../static/images/csxy_xh.png" alt=""/>
+                    <div style="float: right; margin: 10px 40px 0 0;">
+                        <h1 style="margin: 10px 0 10px 0;">兰州城市学院</h1>
+                        <h2 style="margin: 10px 0 10px 0;" id="loginUserName">${userSession.userName }</h2>
+                        <p style="font-size: 20px; margin: 10px 0 10px 0;">欢迎来到大学生就业管理系统！</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <h3 style="font-size: 20px; font-weight: bold;">系统用户分析</h3>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row" style="font-size: 18px;">
+                        <div class="layui-col-md6" style="margin-top: 17px;">
+                            求职者：<span id="qzz_user_sl" class="home-user-tj" onclick="layui.home.openUserTable('1');">0</span>
+                        </div>
+                        <div class="layui-col-md6" style="margin-top: 17px;">
+                            企业HR：<span id="qyhr_user_sl" class="home-user-tj" onclick="layui.home.openUserTable('2');">0</span>
+                        </div>
+                        <div class="layui-col-md6" style="margin-top: 17px;">
+                            学校就业负责人：<span id="xxjyfzr_user_sl" class="home-user-tj" onclick="layui.home.openUserTable('3');">0</span>
+                        </div>
+                        <div class="layui-col-md6" style="margin-top: 17px;">
+                            系统管理员：<span id="xtgly_user_sl" class="home-user-tj" onclick="layui.home.openUserTable('4');">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-carousel" id="home_lbt_div">
+                        <div carousel-item>
+                            <img class="" src="../static/images/lbt1.png" alt=""/>
+                            <img class="" src="../static/images/lbt2.jpg" alt=""/>
+                            <img class="" src="../static/images/lbt3.png" alt=""/>
+                            <img class="" src="../static/images/lbt4.png" alt=""/>
+                            <img class="" src="../static/images/lbt5.jpg" alt=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <h3 style="font-size: 20px; font-weight: bold;">友情链接</h3>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-md6 home-user-tj home-yqlj-card1" onclick="layui.home.openYqlj('1')">
+                            1、当今大学生就业现状分析
+                        </div>
+                        <div class="layui-col-md6 home-user-tj home-yqlj-card1" onclick="layui.home.openYqlj('2')">
+                            2、当今大学生就业形式如何
+                        </div>
+                        <div class="layui-col-md6 home-user-tj home-yqlj-card2" onclick="layui.home.openYqlj('3')">
+                            3、大学生就业数据调查分析
+                        </div>
+                        <div class="layui-col-md6 home-user-tj home-yqlj-card2" onclick="layui.home.openYqlj('4')">
+                            4、大学生如何申请就业补助金
+                        </div>
+                        <div class="layui-col-md12 home-user-tj home-yqlj-card2" onclick="layui.home.openYqlj('5')">
+                            5、中国高校毕业生人数、就业环境及前景向往分析
+                        </div>
+                        <div class="layui-col-md12 home-user-tj home-yqlj-card2" onclick="layui.home.openYqlj('6')">
+                            6、全国高校毕业生就业指导、就业推荐网
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card" style="height: 194px;">
+                <div class="layui-card-header">
+                    <h3 style="font-size: 20px; font-weight: bold;">系统公告</h3>
+                </div>
+                <div class="layui-card-body" style="overflow-y: auto; height: 130px;">
+                    <div class="layui-row" id="home_xtgg_row_div">
+                        <div class="layui-col-md12" style="margin: 10px; font-size: 18px; color: red; font-weight: bold;">
+                            本系统中暂无求职者就业、并无企业招聘到求职者
+                        </div>
+<!--                        <div class="layui-col-md12" style="margin-top: 5px;">-->
+<!--                            求职者【XXX】已成功就业于【XXX公司】的【XXX】职位-->
+<!--                        </div>-->
+<!--                        <div class="layui-col-md12" style="margin-top: 10px;">-->
+<!--                            企业【XXX公司】已成功录用【XXX】为【XXX】-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="home_user_table_div" class="layui-card" style="display: none;">
+        <div class="layui-card-body">
+            <table id="home_user_table" class="layui-table" lay-filter="home_user_table"></table>
+            <!-- 头工具栏 -->
+            <script type="text/html" id="toolbar_home_user_table">
+                <a class="layui-btn layui-btn-sm" lay-event="ref">
+                    <i class="layui-icon layui-icon-refresh"></i>刷新
+                </a>
+                <div class="layui-btn-container"></div>
+            </script>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/jquery-3.4.1.js"></script>
+<script src="../static/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../static/controller/' //静态资源所在路径
+    }).extend({
+        home: '{/}../static/controller/home'
+    }).use(['home'], function () {
+        layui.home.load();
+    })
+</script>
+</body>
+</html>

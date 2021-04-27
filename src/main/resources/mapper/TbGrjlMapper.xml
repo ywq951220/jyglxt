@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csxy.project.dao.TbGrjlMapper">
+    <resultMap id="BaseResultMap" type="com.csxy.project.model.TbGrjl">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="CSRQ" jdbcType="VARCHAR" property="csrq"/>
+        <result column="SG" jdbcType="INTEGER" property="sg"/>
+        <result column="MZ" jdbcType="VARCHAR" property="mz"/>
+        <result column="ZZMM" jdbcType="VARCHAR" property="zzmm"/>
+        <result column="JTZZ" jdbcType="VARCHAR" property="jtzz"/>
+        <result column="DZYX" jdbcType="VARCHAR" property="dzyx"/>
+        <result column="BYYX" jdbcType="VARCHAR" property="byyx"/>
+        <result column="ZGXL" jdbcType="VARCHAR" property="zgxl"/>
+        <result column="YXZW" jdbcType="VARCHAR" property="yxzw"/>
+        <result column="SXZY" jdbcType="VARCHAR" property="sxzy"/>
+        <result column="ZXKC" jdbcType="LONGVARCHAR" property="zxkc"/>
+        <result column="XXJL" jdbcType="LONGVARCHAR" property="xxjl"/>
+        <result column="HJQK" jdbcType="LONGVARCHAR" property="hjqk"/>
+        <result column="ZWPJ" jdbcType="LONGVARCHAR" property="zwpj"/>
+        <result column="YXZT" jdbcType="LONGVARCHAR" property="yxzt"/>
+    </resultMap>
+
+    <resultMap id="BaseGrjlVOResultMap" type="com.csxy.project.model.vo.TbGrjlVO">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="CSRQ" jdbcType="VARCHAR" property="csrq"/>
+        <result column="SG" jdbcType="INTEGER" property="sg"/>
+        <result column="MZ" jdbcType="VARCHAR" property="mz"/>
+        <result column="ZZMM" jdbcType="VARCHAR" property="zzmm"/>
+        <result column="JTZZ" jdbcType="VARCHAR" property="jtzz"/>
+        <result column="DZYX" jdbcType="VARCHAR" property="dzyx"/>
+        <result column="BYYX" jdbcType="VARCHAR" property="byyx"/>
+        <result column="ZGXL" jdbcType="VARCHAR" property="zgxl"/>
+        <result column="YXZW" jdbcType="VARCHAR" property="yxzw"/>
+        <result column="SXZY" jdbcType="VARCHAR" property="sxzy"/>
+        <result column="ZXKC" jdbcType="LONGVARCHAR" property="zxkc"/>
+        <result column="XXJL" jdbcType="LONGVARCHAR" property="xxjl"/>
+        <result column="HJQK" jdbcType="LONGVARCHAR" property="hjqk"/>
+        <result column="ZWPJ" jdbcType="LONGVARCHAR" property="zwpj"/>
+        <result column="YXZT" jdbcType="LONGVARCHAR" property="yxzt"/>
+
+        <result column="NAME" jdbcType="LONGVARCHAR" property="name"/>
+        <result column="SEX" jdbcType="LONGVARCHAR" property="sex"/>
+        <result column="SFZ" jdbcType="LONGVARCHAR" property="sfz"/>
+        <result column="LXDH" jdbcType="LONGVARCHAR" property="lxdh"/>
+    </resultMap>
+
+    <select id="queryGrjlByUserId" resultMap="BaseGrjlVOResultMap">
+        select * from tb_grjl a where a.yxzt='1' and a.user_id=#{userId} and exists (
+            select 1 from sys_user b where a.user_id=b.id and b.yxzt='1'
+        )
+    </select>
+</mapper>
