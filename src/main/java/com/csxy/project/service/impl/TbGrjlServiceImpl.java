@@ -70,6 +70,7 @@ public class TbGrjlServiceImpl extends AbstractService<TbGrjl> implements TbGrjl
         tbGrjlVO.setSex(sysUser.getSex());
         tbGrjlVO.setSfz(sysUser.getSfz());
         tbGrjlVO.setLxdh(sysUser.getLxdh());
+        tbGrjlVO.setUserId(sysUser.getId());
         return tbGrjlVO;
     }
 
