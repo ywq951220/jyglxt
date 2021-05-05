@@ -1,7 +1,7 @@
 app:
   code: jyglxt
 server:
-  port: 1111 # 访问的端口
+  port: 8888 # 访问的端口
   servlet:
     context-path: /jyglxt # 访问的路径
   tomcat:
