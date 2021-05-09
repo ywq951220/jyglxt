@@ -8,8 +8,10 @@ import com.csxy.core.util.StringUtils;
 import com.csxy.project.dao.SysUserMapper;
 import com.csxy.project.dao.TbGrjlMapper;
 import com.csxy.project.dao.TbJltdjlMapper;
+import com.csxy.project.dao.TbZpdwMapper;
 import com.csxy.project.model.SysUser;
 import com.csxy.project.model.TbJltdjl;
+import com.csxy.project.model.TbZpdw;
 import com.csxy.project.model.vo.TbGrjlVO;
 import com.csxy.project.model.vo.TbJlsqjlVO;
 import com.csxy.project.service.TbJltdjlService;
@@ -34,6 +36,9 @@ public class TbJltdjlServiceImpl extends AbstractService<TbJltdjl> implements Tb
 
     @Resource
     private TbGrjlMapper tbGrjlMapper;
+
+    @Resource
+    private TbZpdwMapper tbZpdwMapper;
 
     @Override
     public String saveUserTdjlxx(String saveTdjlJsonData) throws ServiceException {
@@ -137,7 +142,13 @@ public class TbJltdjlServiceImpl extends AbstractService<TbJltdjl> implements Tb
             if(StringUtils.isEmpty(grjlVO.getDzyx())) {
                 throw new ServiceException("求职者电子邮箱为空！");
             } else {
-                String mailTitle = "简历投递反馈通知";
+                //获取单位信息
+                TbZpdw zpdw = tbZpdwMapper.selectByPrimaryKey(oldJltdjl.getDwId());
+                if (null == zpdw || StringUtils.isEmpty(zpdw.getId())) {
+                    throw new ServiceException("未查询到单位信息！");
+                }
+
+                String mailTitle = "【"+ zpdw.getGsmc() +"】简历投递反馈通知";
                 String mailText = "";
                 if ("1".equals(tbJltdjl.getSpzt())) {
                     mailText =
@@ -213,7 +224,12 @@ public class TbJltdjlServiceImpl extends AbstractService<TbJltdjl> implements Tb
             if(StringUtils.isEmpty(grjlVO.getDzyx())) {
                 throw new ServiceException("求职者电子邮箱为空！");
             }
-            String mailTitle = "面试结果通知";
+            //获取单位信息
+            TbZpdw zpdw = tbZpdwMapper.selectByPrimaryKey(oldJltdjl.getDwId());
+            if (null == zpdw || StringUtils.isEmpty(zpdw.getId())) {
+                throw new ServiceException("未查询到单位信息！");
+            }
+            String mailTitle = "【"+ zpdw.getGsmc() +"】面试结果通知";
             String mailText = "";
             if ("1".equals(tbJltdjl.getSpzt())) {
                 mailText =
