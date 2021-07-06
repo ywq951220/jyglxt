@@ -3,6 +3,7 @@ package com.csxy.project.dao;
 import com.csxy.core.common.Mapper;
 import com.csxy.project.model.SysUser;
 import com.csxy.project.model.vo.SysUserVO;
+import com.csxy.project.model.vo.UserSjtjVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface SysUserMapper extends Mapper<SysUser> {
     Integer queryUserCount(String role);
 
     List<SysUserVO> getYjyQzzList();
+
+    List<UserSjtjVO> queryQzzJyqkSjtj();
+
+    List<UserSjtjVO> queryXtyhfxSjtj();
 }

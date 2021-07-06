@@ -1,5 +1,6 @@
 package com.csxy.core.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,5 +23,15 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public static Date getDateByFormatString(String dateStr, String format) {
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		try {
+			return formatter.parse(dateStr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -44,8 +44,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 //
 //                .addResourceLocations("classpath:/templates/xsjyqk/xsjyqk_index.html")
 //
-//                .addResourceLocations("classpath:/templates/user/yhgl_index.html");
+//                .addResourceLocations("classpath:/templates/user/yhgl_index.html")
 //
+//                .addResourceLocations("classpath:/templates/sjtj/sjtj_index.html");
 //    }
 //}
 

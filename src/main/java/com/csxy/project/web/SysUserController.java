@@ -6,6 +6,7 @@ import com.csxy.core.util.JsonUtils;
 import com.csxy.core.util.PageUtil;
 import com.csxy.core.util.WebContextUtil;
 import com.csxy.project.model.vo.SysUserVO;
+import com.csxy.project.model.vo.UserSjtjVO;
 import com.csxy.project.service.SysUserService;
 import com.csxy.project.service.sys.RedisService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -171,6 +172,28 @@ public class SysUserController extends BaseController {
             return ResultGenerator.genSuccessResult(map);
         } catch (Exception e) {
             logger.error("[IndexController]->queryUserRoleSjtj: " + e.getMessage());
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
+
+    @RequestMapping("/queryQzzJyqkSjtj.html")
+    public Result queryQzzJyqkSjtj() {
+        try {
+            List<UserSjtjVO> jyqkSjtjList = sysUserService.queryQzzJyqkSjtj();
+            return ResultGenerator.genSuccessResult(jyqkSjtjList);
+        } catch (Exception e) {
+            logger.error("[SysUserController]->queryQzzJyqkSjtj: " + e.getMessage());
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
+
+    @RequestMapping("/queryXtyhfxSjtj.html")
+    public Result queryXtyhfxSjtj() {
+        try {
+            List<UserSjtjVO> list = sysUserService.queryXtyhfxSjtj();
+            return ResultGenerator.genSuccessResult(list);
+        } catch (Exception e) {
+            logger.error("[SysUserController]->queryXtyhfxSjtj: " + e.getMessage());
             return ResultGenerator.genFailResult(e.getMessage());
         }
     }

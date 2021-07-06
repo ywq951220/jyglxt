@@ -7,6 +7,7 @@ import com.csxy.core.util.StringUtils;
 import com.csxy.project.dao.SysUserMapper;
 import com.csxy.project.model.SysUser;
 import com.csxy.project.model.vo.SysUserVO;
+import com.csxy.project.model.vo.UserSjtjVO;
 import com.csxy.project.service.SysUserService;
 import com.csxy.core.common.AbstractService;
 import org.springframework.beans.BeanUtils;
@@ -193,5 +194,23 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
             }
         }
         return returnList;
+    }
+
+    @Override
+    public List<UserSjtjVO> queryQzzJyqkSjtj() throws ServiceException {
+        List<UserSjtjVO> list = sysUserMapper.queryQzzJyqkSjtj();
+        if (null == list) {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
+
+    @Override
+    public List<UserSjtjVO> queryXtyhfxSjtj() throws ServiceException {
+        List<UserSjtjVO> list = sysUserMapper.queryXtyhfxSjtj();
+        if (null == list) {
+            list = new ArrayList<>();
+        }
+        return list;
     }
 }

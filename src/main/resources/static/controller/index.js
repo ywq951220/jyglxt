@@ -118,6 +118,7 @@ layui.extend({
             $('#jyglxt_index_zwtjjl').show();
             $('#jyglxt_index_xsjyqk').show();
             $('#jyglxt_index_xsjl').show();
+            $('#jyglxt_index_sjtj').show();
         }
 
         if (role === '4') {
@@ -126,6 +127,7 @@ layui.extend({
             //如果角色为4，则显示招聘信息和用户管理
             $('#jyglxt_index_zpxx').show();
             $('#jyglxt_index_yhgl').show();
+            $('#jyglxt_index_sjtj').show();
         }
 
         //拼接日期

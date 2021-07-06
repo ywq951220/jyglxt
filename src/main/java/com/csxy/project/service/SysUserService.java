@@ -3,6 +3,7 @@ import com.csxy.core.common.ServiceException;
 import com.csxy.project.model.SysUser;
 import com.csxy.core.common.Service;
 import com.csxy.project.model.vo.SysUserVO;
+import com.csxy.project.model.vo.UserSjtjVO;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,8 @@ public interface SysUserService extends Service<SysUser> {
     Map<String, Object> queryUserRoleSjtj() throws ServiceException;
 
     List<String> queryHomeXtggList() throws ServiceException;
+
+    List<UserSjtjVO> queryQzzJyqkSjtj() throws ServiceException;
+
+    List<UserSjtjVO> queryXtyhfxSjtj() throws ServiceException;
 }

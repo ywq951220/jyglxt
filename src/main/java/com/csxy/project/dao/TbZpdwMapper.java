@@ -11,4 +11,6 @@ public interface TbZpdwMapper extends Mapper<TbZpdw> {
     List<TbZpdw> getZpdwList(TbZpdwVO tbZpdwVO);
 
     TbZpdw queryZpdwByUserId(String userId);
+
+    List<TbZpdwVO> loadQylyrsSjtj();
 }

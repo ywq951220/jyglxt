@@ -99,4 +99,26 @@
             select 1 from sys_user e where a.user_id=e.id and e.yxzt='1'
         )
     </select>
+
+    <select id="queryQzzJyqkSjtj" resultType="com.csxy.project.model.vo.UserSjtjVO">
+        select '已就业' jyqk,count(0) jyqkzs from sys_user a where a.yxzt='1' and a.role='1' and exists (
+            select 1 from tb_jltdjl b where a.id=b.user_id and b.yxzt='1' and b.spzt='1' and b.lyzt='1'
+        )
+        union
+        select '未就业' jyqk,(
+            (select count(0) from sys_user c where c.yxzt='1' and c.role='1')
+                -
+                (select count(0) jyqkzs from sys_user a where a.yxzt='1' and a.role='1' and exists (
+                        select 1 from tb_jltdjl b where a.id=b.user_id and b.yxzt='1' and b.spzt='1' and b.lyzt='1'
+                ))
+        ) jyqkzs from dual
+    </select>
+
+    <select id="queryXtyhfxSjtj" resultType="com.csxy.project.model.vo.UserSjtjVO">
+        select b.name roleName,k.userzs userzs from sys_paramter b
+        left join (
+            select a.role,count(0) userzs from sys_user a where a.yxzt='1' group by a.role
+        ) k ON b.value=k.role
+        where b.typecode='USER_ROLE' and b.yxzt='1'
+    </select>
 </mapper>

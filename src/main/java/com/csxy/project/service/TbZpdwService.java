@@ -17,4 +17,6 @@ public interface TbZpdwService extends Service<TbZpdw> {
     void dwsh(String dwshData) throws ServiceException;
 
     void delZpdwXx(String id) throws ServiceException;
+
+    List<TbZpdwVO> loadQylyrsSjtj() throws ServiceException;
 }

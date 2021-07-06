@@ -114,4 +114,13 @@ public class TbZpdwServiceImpl extends AbstractService<TbZpdw> implements TbZpdw
             }
         }
     }
+
+    @Override
+    public List<TbZpdwVO> loadQylyrsSjtj() throws ServiceException {
+        List<TbZpdwVO> list = tbZpdwMapper.loadQylyrsSjtj();
+        if (null == list) {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
 }

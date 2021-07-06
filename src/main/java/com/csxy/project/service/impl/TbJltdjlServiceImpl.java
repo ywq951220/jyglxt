@@ -1,5 +1,6 @@
 package com.csxy.project.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.csxy.core.common.ServiceException;
 import com.csxy.core.util.DateUtils;
 import com.csxy.core.util.JsonUtils;
@@ -119,6 +120,14 @@ public class TbJltdjlServiceImpl extends AbstractService<TbJltdjl> implements Tb
         if (null == oldJltdjl || StringUtils.isEmpty(oldJltdjl.getId())) {
             throw new ServiceException("未查询到简历投递记录信息！");
         }
+
+        JSONObject jsonObject = JSONObject.parseObject(shDataJson);
+        String spsjStr = (String) jsonObject.get("mssj");
+        Date mssj = null;
+        if (!StringUtils.isEmpty(spsjStr)) {
+            mssj = DateUtils.getDateByFormatString(spsjStr, "yyyy-MM-dd HH:mm:ss");
+        }
+
         oldJltdjl.setSpzt(tbJltdjl.getSpzt());
         oldJltdjl.setSpsj(new Date());
         oldJltdjl.setMssj(tbJltdjl.getMssj());

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -75,6 +76,17 @@ public class TbZpdwController extends BaseController {
             return ResultGenerator.genSuccessResult();
         } catch (Exception e) {
             logger.error("[TbZpdwController] -> delZpdwXx: " + e.getMessage());
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
+
+    @RequestMapping("/loadQylyrsSjtj.html")
+    public Result loadQylyrsSjtj() {
+        try {
+            List<TbZpdwVO> list = tbZpdwService.loadQylyrsSjtj();
+            return ResultGenerator.genSuccessResult(list);
+        } catch (Exception e) {
+            logger.error("[TbZpdwController] -> loadQylyrsSjtj: " + e.getMessage());
             return ResultGenerator.genFailResult(e.getMessage());
         }
     }

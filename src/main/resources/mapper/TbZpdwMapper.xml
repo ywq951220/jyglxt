@@ -37,4 +37,16 @@
     <select id="queryZpdwByUserId" resultMap="BaseResultMap">
         select * from tb_zpdw a where a.yxzt='1' and a.user_id=#{userId}
     </select>
+
+    <select id="loadQylyrsSjtj" resultType="com.csxy.project.model.vo.TbZpdwVO">
+        select * from (
+            select b.gsmc,k.lyzs from tb_zpdw b
+            left join (
+                select a.dw_id,count(0) lyzs from tb_jltdjl a where a.yxzt='1' and a.spzt='1' and a.lyzt='1' and exists (
+                        select 1 from tb_zpdw c where a.dw_id=c.id and c.yxzt='1'
+                    ) group by a.dw_id
+            ) k on b.id=k.dw_id
+            where b.yxzt='1'
+        ) k1 order by k1.lyzs desc
+    </select>
 </mapper>
